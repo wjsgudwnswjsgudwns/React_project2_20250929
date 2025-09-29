@@ -11,7 +11,7 @@ function TodoList({todo}) {
                 {/* for문 형태로 찍어줘야 함 */}
                 {todo.map((it) => (
                     <div>
-                        <TodoItem {...it} />
+                        <TodoItem key={it.id} {...it} />
                         {/* {id, content, isDone, createdDate} -> TodoItem 컴포넌트에 전달 */}
                     </div>
                 ))}
