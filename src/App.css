@@ -1,6 +1,15 @@
 .App {
-  text-align: center;
+  max-width: 500px; 
+  width: 100%; 
+  margin: 0 auto; 
+  box-sizing: border-box; 
+  padding: 20px; 
+  /* border: 1px solid gray;  */
+  display: flex; /* 수평으로 배치 */
+  flex-direction: column; /* 수직으로 배치 */
+  gap: 30px; /* 갭만큼 떨어짐 */
 }
+
 
 .App-logo {
   height: 40vmin;
