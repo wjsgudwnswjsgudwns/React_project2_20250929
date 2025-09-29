@@ -2,7 +2,7 @@ import "./TodoList.css";
 import TodoItem from "./TodoItem";
 import { useState } from "react";
 
-function TodoList({todo , onUpdate}) {
+function TodoList({todo , onUpdate, onDelete}) {
 
     const [search, setSearch] = useState("");
 
@@ -29,7 +29,7 @@ function TodoList({todo , onUpdate}) {
                 {/* for문 형태로 찍어줘야 함 */}
                 {getSearchResult().map((it) => (
                     <div>
-                        <TodoItem key={it.id} {...it} onUpdate={onUpdate}/>
+                        <TodoItem key={it.id} {...it} onUpdate={onUpdate} onDelete={onDelete}/>
                         {/* {id, content, isDone, createdDate} -> TodoItem 컴포넌트에 전달 */}
                     </div>
                 ))}
