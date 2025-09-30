@@ -1,6 +1,9 @@
 import "./TodoItem.css";
+import React from 'react';
 
-function TodoItem({ id, content, isDone, createdDate, onUpdate, onDelete }) {
+function TodoItem({id, content, isDone, createDate, onUpdate, onDelete}) {
+
+    console.log(`${id} TodoItem 업데이트`);
 
     function onChangeCheckbox() {
         onUpdate(id);
@@ -13,15 +16,15 @@ function TodoItem({ id, content, isDone, createdDate, onUpdate, onDelete }) {
     return (
         <div className="TodoItem">
             <div className="checkbox_col">
-                <input checked={isDone} type="checkbox" onChange={onChangeCheckbox}></input>
+                <input type="checkbox" onChange={onChangeCheckbox} checked={isDone} />
             </div>
-            <div className="title_col">{isDone === false ? content:content + " 완료"}</div>
-            <div className="date_col">{new Date(createdDate).toLocaleDateString()}</div>
-            <div className="btn_col" onClick={onClickDelete}>
-                <button>삭제</button>
+            <div className="title_col">{isDone === false ? content:content + " 완료!"}</div>
+            <div className="date_col">{new Date().toDateString()}</div>
+            <div className="btn_col">
+                <button onClick={onClickDelete}>삭제</button>
             </div>
-        </div>
+        </div>        
     );
-};
+}
 
-export default TodoItem;
+export default React.memo(TodoItem);

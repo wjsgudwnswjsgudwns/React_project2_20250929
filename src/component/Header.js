@@ -1,5 +1,7 @@
 import "./Header.css";
 
+import React from 'react';
+
 function Header() {
 
     return (
@@ -10,4 +12,4 @@ function Header() {
     );
 }
 
-export default Header;
+export default React.memo(Header); // Header 컴포넌트에 메모이제이션 적용 후 내보내기
