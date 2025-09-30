@@ -2,7 +2,16 @@ import './App.css';
 import Header from "./component/Header"
 import TodoEditor from './component/TodoEditor';
 import TodoList from './component/TodoList';
-import { useState, useRef } from 'react';
+import { useState, useRef, useReducer } from 'react';
+
+function reducer(state,action) {
+  switch (action.type) {
+    case "CREATE":
+      {return [action.newItem,...state]}  
+    default:
+      return state;
+  }
+}
 
 function App() {
 
@@ -27,41 +36,49 @@ function App() {
     },
   ];
 
-  const [todo, setTodo] = useState(mockTodo);
+  //const [todo, setTodo] = useState(mockTodo);
+  const [todo,dispatch] = useReducer(reducer, mockTodo);
 
   const idRef = useRef(3); // 초기값 3
 
   function onCreate(content) {
-    const newItem = {
-      id: idRef.current, // 현재 저장하고 있는 값을 불러옴
+    // const newItem = {
+    //   id: idRef.current, // 현재 저장하고 있는 값을 불러옴
+    //   isDone: false,
+    //   content,
+    //   createdDate: new Date().getTime()
+    // };
+    // //setTodo([newItem, ...todo]);
+    // idRef.current++;
+
+    dispatch({type:"CREATE",newItem:
+      {id: idRef.current,
       isDone: false,
       content,
-      createdDate: new Date().getTime()
-    };
-    setTodo([newItem, ...todo]);
-    idRef.current++;
+      createdDate: new Date().getTime()}});
+      idRef.current++;
   };
 
   function onUpdate(targetId) {
-    setTodo(
-    todo.map((it) => {
-      // 할일 아이템을 반복하다가 들어온 targetId와 현재 읽고 있는 할일 아이템의 id가 일치하면 참
-      if(it.id === targetId) {
-        return {
-          ...it, isDone : !it.isDone
-        };
-      } else {
-        return it;
-      }
-    })
-    );
+    // setTodo(
+    // todo.map((it) => {
+    //   // 할일 아이템을 반복하다가 들어온 targetId와 현재 읽고 있는 할일 아이템의 id가 일치하면 참
+    //   if(it.id === targetId) {
+    //     return {
+    //       ...it, isDone : !it.isDone
+    //     };
+    //   } else {
+    //     return it;
+    //   }
+    // })
+    // );
   }
 
   function onDelete(targetId) {
-    setTodo(
-    todo.filter((it) => it.id !== targetId)
-    //삭제를 클릭한 id 아이템을 제외한 나머지 할일 리스트를 todo에 저장함
-    );
+    // setTodo(
+    // todo.filter((it) => it.id !== targetId)
+    // //삭제를 클릭한 id 아이템을 제외한 나머지 할일 리스트를 todo에 저장함
+    // );
   }
 
   return (
